@@ -1,0 +1,102 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #7dd196ec; /* Color de fondo tomado de estilo.css */
+    font-family: 'Open Sans', sans-serif; /* Fuente de estilo.css */
+    background-image: url("../imagenes/heatrunner.jpg");
+    background-size: cover; /* Ajusta la imagen para cubrir todo el espacio */
+    background-position: center; /* Centra la imagen */
+    background-repeat: no-repeat; /* Evita que la imagen se repita */
+}
+
+.login_container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 80%; /* Ajuste de ancho para mejor visualización */
+    max-width: 400px; /* Máximo ancho para evitar que sea demasiado grande en pantallas grandes */
+}
+
+.login_title {
+    color: #393E41; /* Color de texto tomado de estilo.css */
+    margin-bottom: 20px;
+}
+
+.login_input {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f0f0f0; /* Fondo ligeramente gris para los campos de entrada */
+    width: 100%; /* Asegura que los inputs ocupen todo el ancho disponible */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+.login_button {
+    background-color: #44BBA4; /* Color de botón inspirado en estilo.css */
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transición suave al cambiar de color */
+    width: 100%; /* Asegura que el botón ocupe todo el ancho disponible */
+    box-sizing: border-box; /* Incluye el padding y el borde en el ancho total */
+}
+
+.login_button:hover {
+    background-color: #393E41; /* Cambio de color al pasar el mouse */
+}
+
+.login_register-link {
+    display: block;
+    margin-top: 15px;
+    color: #ff5722; /* Color inspirado en estilo.css */
+    text-decoration: none; /* Remover subrayado */
+}
+
+.login_register-link:hover {
+    color: #44BBA4; /* Cambio de color al pasar el mouse */
+}
+
+@media (max-width: 1200px) {
+    .login_container {
+        width: 90%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 992px) {
+    .login_container {
+        width: 95%;
+        max-width: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .login_container {
+        width: 100%;
+        max-width: 280px;
+        padding: 20px;
+    }
+}
+
+@media (max-width: 576px) {
+    .login_container {
+        width: 100%;
+        max-width: 260px;
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login_container {
+        width: 100%;
+        max-width: 240px;
+        padding: 10px;
+    }
+}

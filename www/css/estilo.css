@@ -1,0 +1,534 @@
+body {
+    font-family: 'Open Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #f0f0f0;
+    line-height: 1.6;
+    color: #333;
+}
+
+header {
+    background-color: #393E41;
+    color: #E7BB41;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1, h2 {
+    font-family: 'Roboto', sans-serif;
+    color: #E7BB41;
+}
+h1 {
+    font-size: 2.5rem;
+}
+
+h2 {
+    font-size: 2rem;
+}
+
+a {
+    color: #393E41;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: #44BBA4;
+}
+
+
+.footer {
+    background-color: #393E41;
+    color: #E7BB41;
+    padding: 20px 0;
+    text-align: center;
+    margin-top: auto;
+}
+
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+}
+
+.footer-section h2 {
+    margin-bottom: 10px;
+}
+
+.footer-section p, .footer-section ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 10px;
+}
+
+.footer-section ul li a {
+    color: #E7BB41;
+    text-decoration: none;
+}
+
+.footer-section ul li a:hover {
+    text-decoration: underline;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+}
+
+.social-links li {
+    margin: 0 10px;
+}
+
+.footer-bottom {
+    background-color: #2C2F33;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+
+.footer-bottom p {
+    margin: 0;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-left,
+.nav-right {
+    display: flex;
+    align-items: center;
+}
+
+.back-btn {
+    color: #E7BB41;
+    font-size: 1.2rem;
+    text-decoration: none;
+    margin-right: 10px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+}
+
+.avatar-container {
+    width: 40px;
+    height: 40px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.username {
+    margin-right: 10px;
+}
+
+.separator {
+    margin-right: 10px;
+}
+
+.logout-btn {
+    background-color: transparent;
+    color: #E7BB41;
+    border: 2px solid #E7BB41;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    padding: 5px 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #44BBA4;
+    color: #393E41;
+    border: 2px solid #f3f3f300;
+}
+
+.menu-temperaturas {
+    background-color: #44BBA4;
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 20px;
+    list-style: none;
+    margin: 0;
+    margin: 0;
+    flex-wrap: wrap;
+}
+
+.menu-temperaturas li {
+    display: flex;
+    align-items: center;
+    margin: 0;
+
+}
+
+.nombre-habitacion {
+    display: flex;
+    align-items: center;
+    margin: 5px 0;
+}
+
+.temperatura {
+    font-style: italic;
+}
+
+.plano-casa {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+    flex: 1 0 auto;
+    background-image: url("../imagenes/heatrunner.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.color {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+}
+
+.vivienda-container {
+    width: 80vw;
+    height: 50vh;
+    margin: 0 auto;
+    background-color: rgba(128, 128, 128, 0.603);
+    border: 5px solid #44BBA4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.vivienda {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    margin-right: 2%;
+}
+
+.room {
+    position: absolute;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E7BB41;
+    margin-right: 2%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.room:hover {
+    transform: scale(1.05);
+}
+
+
+.room.hover-persistente {
+    background-color: #ccc;
+}
+
+.cocina {
+    top: 2%;
+    left: 2%;
+    width: 23%;
+    height: 70%;
+}
+
+.entrada {
+    top: 74%;
+    left: 2%;
+    width: 23%;
+    height: 24%;
+}
+
+.salon {
+    top: 50%;
+    left: 26%;
+    width: 49%;
+    height: 48%;
+}
+
+.habitacion1 {
+    top: 2%;
+    left: 26%;
+    width: 24%;
+    height: 36%;
+}
+
+.habitacion2 {
+    top: 2%;
+    left: 51%;
+    width: 24%;
+    height: 36%;
+}
+
+.dormitorio {
+    top: 2%;
+    left: 76%;
+    width: 24%;
+    height: 46%;
+}
+
+.balcon {
+    top: 50%;
+    left: 76%;
+    width: 24%;
+    height: 48%;
+}
+
+.bano {
+    top: 40%;
+    left: 26%;
+    width: 15%;
+    height: 8%;
+}
+
+.hall {
+    top: 40%;
+    left: 42%;
+    width: 33%;
+    height: 8%;
+}
+
+.controles-vivienda {
+    width: 100%;
+    margin-bottom: auto;
+}
+
+.escala-temperatura {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #393E41;
+    color: #E7BB41;
+    padding: 20px;
+    text-align: center;
+    justify-content: space-between;
+}
+
+.escala-temperatura h2 {
+    margin: 0 0 10px;
+}
+
+.escala-temperatura ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.escala-temperatura li {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.desactivar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #393E41;
+    color: #E7BB41;
+    padding: 20px;
+    text-align: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.desactivar h2 {
+    margin: 0 0 10px;
+}
+
+.desactivar ul {
+    list-style: none;
+    margin: 0;
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.desactivar li {
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+.desact {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #E7BB41;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.desact:hover {
+    background-color: #44BBA4;
+    color: #393E41;
+    border: 2px solid #f3f3f300;
+}
+
+.hover-permanente {
+    background-color: #44BBA4;
+    color: #393E41;
+    border: 2px solid #393E41;
+}
+
+.disabled-link {
+    pointer-events: none;
+    cursor: default;
+    
+}
+
+.control-ac, .control-temperatura {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #393E41;
+    color: #E7BB41;
+    padding: 20px;
+    text-align: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.control-ac h2, .control-temperatura h2 {
+    margin: 0 0 10px;
+}
+
+.ac-control, .aplicar-cambios {
+    background-color: transparent;
+    color: #ffffff;
+    border: 2px solid #E7BB41;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ac-control:hover, .aplicar-cambios:hover {
+    background-color: #44BBA4;
+    color: #393E41;
+    border: 2px solid #f3f3f300;
+}
+
+/*
+button {
+    background-color: #44BBA4;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #393E41;
+}
+*/
+
+
+#sliderTemperatura {
+    width: 100%;
+    margin: 10px 0;
+}
+
+#valorTemperatura {
+    font-size: 18px;
+    margin-left: 10px;
+}
+
+@media (max-width: 1200px) {
+    .vivienda-container {
+        height: 80vh;
+        width: 90vw;
+    }
+}
+
+@media (max-width: 992px) {
+    .vivienda-container {
+        height: 70vh;
+        width: 95vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-temperaturas {
+        flex-direction: column;
+    }
+    .menu-temperaturas li {
+        margin-bottom: 10px;
+        justify-content: center;
+    }
+    .vivienda-container {
+        height: 50vh;
+        width: 100vw;
+    }
+    .plano-casa {
+        order: 1;
+    }
+    .controles-vivienda {
+        order: 2;
+    }
+    footer {
+        order: 3;
+    }
+}
+
+@media (max-width: 576px) {
+    .vivienda-container {
+        height: 40vh;
+        width: 100vw;
+    }
+}
+
+@media (max-width: 480px) {
+    .vivienda-container {
+        height: 30vh;
+        width: 100vw;
+        
+    }
+}
+
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.room {
+    animation: fadeIn 1s ease-in-out;
+}

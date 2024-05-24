@@ -1,0 +1,13 @@
+.custom-theme {
+    --mdc-theme-primary: #3f51b5;
+    --mdc-theme-on-primary: #ffffff;
+    --mdc-theme-secondary: #ff4081;
+    --mdc-theme-on-secondary: #ffffff;
+    --mdl-theme-primary: #3f51b5;
+    --mdl-theme-primary-dark: #303f9f;
+    --mdl-theme-primary-contrast: #ffffff;
+    --mdl-theme-secondary: #ff4081;
+    --mdl-theme-secondary-dark: #e040fb;
+    --mdl-theme-secondary-contrast: #ffffff;
+}
+
