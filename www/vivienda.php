@@ -77,7 +77,7 @@
             // Mostrar la temperatura de cada sensor disponible
             foreach ($sensores as $nombreSensor => $temperatura) {
                 $nombreBonito = isset($nombresBonitos[$nombreSensor]) ? $nombresBonitos[$nombreSensor] : $nombreSensor;
-                echo '<li><span class="nombre-habitacion">' . $nombreBonito . ':</span><span class="temperatura">' . $temperatura . '°C</span></li>';
+                echo '<li><span class="nombre-habitacion">' . $nombreBonito . ': </span><span class="temperatura">' . $temperatura . '°C</span></li>';
             }
             ?>
         </div>
