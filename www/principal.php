@@ -53,7 +53,7 @@
     <header class="navbar navbar-inverse" role="banner">
         <div class="navbar-header">            
             <a class="navbar-brand" href="principal.php">
-            <img src="/imagenes/logosolo.png" class="logo" alt="logo" width="65" height="65" />Panel del administrador
+            <img src="../imagenes/heat_logo.png" class="logo" alt="logo" width="65" height="65" />Panel del administrador
             </a>
         </div>
         <ul class="nav navbar-nav pull-right hidden-xs">                       
@@ -94,10 +94,7 @@
             
             
             <li><a href="cliente.php" >Administración de usuarios</a></li> 
-                
-               
-                               
-              
+                 
         </ul>
     </div>
     <!-- end sidebar -->

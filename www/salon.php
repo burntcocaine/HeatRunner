@@ -1,3 +1,15 @@
+<?php  
+	/* Desarrollado por: PROGRAMANDO BROTHERS 	
+	Suscribete a : https://www.youtube.com/ProgramandoBrothers y comparte los v�deos.
+	Recuerda: "EL CONOCIMIENTO SE COMPARTE, POR M�S POCO QUE SEA".
+	*/
+    session_start();
+    $usuario = $_SESSION['usuario'];
+    if(!isset($usuario)){
+        header("Location: index.php");
+        exit;
+    }
+?> 
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -45,7 +57,7 @@
                 $colorSalon = obtenerColorPorTemperatura($temperaturaMediaSalon);
                 ?>
                 <div class="habitacion" id="habitacion" style="background-color: <?php echo $colorSalon; ?>;">
-                    <div id="temp-view-1" class="temp-view">Salón</div>
+                    <div id="temp-view-1" class="temp-view">Cambiar vista</div>
                     <div id="temp-view-2" class="temp-view temp-view-hidden">
                         <div class="half" style="background-color: <?php echo obtenerColorPorTemperatura($sensores['salon1-room']); ?>;">Salón 1</div>
                         <div class="half" style="background-color: <?php echo obtenerColorPorTemperatura($sensores['salon2-room']); ?>;">Salón 2</div>

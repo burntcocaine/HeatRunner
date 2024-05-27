@@ -69,7 +69,7 @@
                         <img src="../imagenes/heat_logo.jpg" class="avatar">
                     </div>
                     <span class="username">
-                        <?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : $_SESSION['usuario']; ?>
+                        <?php echo $_SESSION['usuario']; ?>
                     </span>
                     <span class="separator">|</span>
                     <form action="cerrarSesion.php" method="post" style="display:inline;">
@@ -184,3 +184,4 @@
     <script type="text/javascript" src="vivienda.js"></script>
 </body>
 </html>
+

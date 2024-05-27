@@ -95,9 +95,7 @@
             
             <li><a href="cliente.php" >Administración de usuarios</a></li> 
                 
-               
-                               
-              
+
         </ul>
     </div>
     <!-- end sidebar -->
@@ -170,10 +168,13 @@
 
                 <!-- right column -->
                 <div id="miTabla" class="col-md-7 column pull-right">
-                    <div id="cargando"></div>
+                    <div id="cargando">dfsgd</div>
                 </div>
             </div>
         </div>
+                <div id="miTabla" class="col-md-7 column">
+                    <div id="cargando"></div>
+                </div>
     </div>
 
 
