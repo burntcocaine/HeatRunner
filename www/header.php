@@ -7,28 +7,65 @@
     <link rel="stylesheet" href="../css/estilo.css">
 </head>
 <body>
-    
-    <?php include 'menu_temperaturas.php'; ?>
-    
+    <?php
+    include_once('conexion.php');
+    include_once('obtener_colores.php'); // Asegúrate de que este script calcule y devuelva $colores como un array asociativo
+
+    $sql = "
+        SELECT s.NombreSensor, l.ValorLectura, l.FechaLectura
+        FROM Sensores s
+        JOIN (
+            SELECT IdSensor, MAX(FechaLectura) as MaxFecha
+            FROM Lecturas
+            GROUP BY IdSensor
+        ) as max_l
+        ON s.Sensor = max_l.IdSensor
+        JOIN Lecturas l
+        ON s.Sensor = l.IdSensor AND l.FechaLectura = max_l.MaxFecha
+    ";
+
+    $resultado = mysqli_query($conexion, $sql);
+    $sensores = [];
+
+    while ($fila = mysqli_fetch_assoc($resultado)) {
+        $sensores[$fila['NombreSensor']] = $fila['ValorLectura'];
+    }
+
+    // Asegúrate de que obtener_colores.php calcule $colores basándose en los sensores disponibles.
+    // Añade un color gris por defecto para cualquier habitación sin sensor.
+    $colores = [
+        'habitacion1-room' => isset($sensores['habitacion1-room']) ? obtenerColorPorTemperatura($sensores['habitacion1-room']) : '#808080',
+        'habitacion2-room' => isset($sensores['habitacion2-room']) ? obtenerColorPorTemperatura($sensores['habitacion2-room']) : '#808080',
+        'bano-room' => isset($sensores['bano-room']) ? obtenerColorPorTemperatura($sensores['bano-room']) : '#808080',
+        'dormitorio-room' => isset($sensores['dormitorio-room']) ? obtenerColorPorTemperatura($sensores['dormitorio-room']) : '#808080',
+        'Salon' => isset($colorSalon) ? $colorSalon : '#808080',
+        // Añade aquí cualquier otra habitación que necesites con un color por defecto
+        'Cocina' => 'grey',
+        'Entrada' => 'grey',
+        'Balcon' => 'grey',
+        'Hall' => 'grey'
+    ];
+    ?>
+
     <header>
-    <a href="vivienda.php" id=""><h1>Heat Runner</h1></a>
-        <ul class="menu-temperaturas">
-        <?php
-        // Mostrar temperaturas de habitaciones con resultados
-        if (isset($sensores['habitacion1-room'])) {
-            echo '<li><span class="nombre-habitacion">Habitación 1:</span><span class="temperatura">' . $sensores['habitacion1-room'] . '°C</span></li>';
-        }
-        if (isset($sensores['habitacion2-room'])) {
-            echo '<li><span class="nombre-habitacion">Habitación 2:</span><span class="temperatura">' . $sensores['habitacion2-room'] . '°C</span></li>';
-        }
-        if (isset($sensores['bano-room'])) {
-            echo '<li><span class="nombre-habitacion">Baño:</span><span class="temperatura">' . $sensores['bano-room'] . '°C</span></li>';
-        }
-        if (isset($sensores['dormitorio-room'])) {
-            echo '<li><span class="nombre-habitacion">Dormitorio:</span><span class="temperatura">' . $sensores['dormitorio-room'] . '°C</span></li>';
-        }
-        // Mostrar temperatura media del Salón
-        echo '<li><span class="nombre-habitacion">Salón:</span><span class="temperatura">' . $temperaturaMediaSalon . '°C</span></li>';
-        ?>
-    </ul>
+        <h1>Heat Runner</h1>
+        <nav>
+            <div class="nav-left">
+                <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i></a>
+            </div>
+            <div class="nav-right">
+                <div class="user-info">
+                    <div class="avatar-container">
+                        <img src="../imagenes/heat_logo.jpg" class="avatar">
+                    </div>
+                    <span class="username">
+                        <?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'; ?>
+                    </span>
+                    <span class="separator">|</span>
+                    <form action="cerrarSesion.php" method="post" style="display:inline;">
+                        <button type="submit" class="logout-btn">Cerrar Sesión</button>
+                    </form>
+                </div>
+            </div>
+        </nav>
     </header>

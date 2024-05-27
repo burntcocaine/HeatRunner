@@ -1,12 +1,3 @@
-<?php  
-	
-    session_start();
-    $usuario = $_SESSION['usuario'];
-    if(!isset($usuario)){
-        header("Location: index.php");
-        exit;
-    }
-?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -17,7 +8,6 @@
 </head>
 <body>
     <?php
-    
     include_once('conexion.php');
     include_once('obtener_colores.php'); // Asegúrate de que este script calcule y devuelva $colores como un array asociativo
 
@@ -69,7 +59,7 @@
                         <img src="../imagenes/heat_logo.jpg" class="avatar">
                     </div>
                     <span class="username">
-                        <?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : $_SESSION['usuario']; ?>
+                        <?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'; ?>
                     </span>
                     <span class="separator">|</span>
                     <form action="cerrarSesion.php" method="post" style="display:inline;">

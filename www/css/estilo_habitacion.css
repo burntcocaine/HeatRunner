@@ -18,6 +18,8 @@
     margin-right: 10px;
     flex: 1;
     text-align: center;
+    flex-direction: column;
+
 }
 
 .temperatura {
@@ -83,6 +85,7 @@ plano-habitacion {
     justify-content: center;
     border: 1px solid #E7BB41;
     background-color: white;
+    width: 100vh;
 }
 
 .temp-view {

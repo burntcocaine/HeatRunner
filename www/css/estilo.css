@@ -190,7 +190,7 @@ nav {
 .nombre-habitacion {
     display: flex;
     align-items: center;
-    margin: 5px 0;
+    margin-right: 5px;
 }
 
 .temperatura {

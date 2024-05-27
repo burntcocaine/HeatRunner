@@ -1,7 +1,8 @@
 <?php
-include_once('conexion.php');
+
 
 session_start();
+include_once('conexion.php');
 
 $usuario = mysqli_real_escape_string($conexion, $_POST['usuario']);
 $contra = mysqli_real_escape_string($conexion, $_POST['contra']);
