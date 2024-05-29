@@ -23,7 +23,7 @@ include_once('conexion.php');
                         <tr>
                             <th>ID</th>
                             <th>Usuario</th>
-                            <!-- <th>Contraseña</th> -->
+                            <th>Contraseña</th>
                             <th>Estado</th>
                             <th>Nombre Completo</th>
                             <th>DNI</th>
@@ -46,7 +46,7 @@ include_once('conexion.php');
                             echo "<tr>";
                             echo "<td>".$clientes['id']."</td>";
                             echo "<td>".$clientes['usuario']."</td>";
-                            // echo "<td>".$clientes['contra']."</td>";
+                            echo "<td>".$clientes['contra']."</td>";
                             echo "<td>".$clientes['estado']."</td>";
                             echo "<td>".$clientes['nombre_completo']."</td>";
                             echo "<td>".$clientes['dni']."</td>";
@@ -59,7 +59,7 @@ include_once('conexion.php');
                             echo "<td>".$clientes['biografia']."</td>";
                             echo "<td>".$clientes['avatar']."</td>";
                             echo "<td class='center'>
-                                    <a onclick='LDE(".$clientes['id'].");' data-toggle='modal' data-target='#myModal-Edit' style='cursor:pointer;'><i class='icon-edit'></i></a>
+                                    <a href='cliente.php?edit=".$clientes['id']."' class='btn btn-info'>Editar</a>
                                     <a onclick='ME(".$clientes['id'].");' data-toggle='modal' data-target='#myModal-Delete' style='cursor:pointer;'><i class='icon-remove'></i></a>
                                 </td>";
                             echo "</tr>";
