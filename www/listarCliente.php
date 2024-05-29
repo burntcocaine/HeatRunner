@@ -23,7 +23,7 @@ include_once('conexion.php');
                         <tr>
                             <th>ID</th>
                             <th>Usuario</th>
-                            <th>Contraseña</th>
+                            <!-- <th>Contraseña</th> -->
                             <th>Estado</th>
                             <th>Nombre Completo</th>
                             <th>DNI</th>
@@ -46,7 +46,7 @@ include_once('conexion.php');
                             echo "<tr>";
                             echo "<td>".$clientes['id']."</td>";
                             echo "<td>".$clientes['usuario']."</td>";
-                            echo "<td>".$clientes['contra']."</td>";
+                            // echo "<td>".$clientes['contra']."</td>";
                             echo "<td>".$clientes['estado']."</td>";
                             echo "<td>".$clientes['nombre_completo']."</td>";
                             echo "<td>".$clientes['dni']."</td>";

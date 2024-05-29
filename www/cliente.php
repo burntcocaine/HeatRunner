@@ -112,50 +112,96 @@
                 <!-- left column -->
                 <div id="miPagina" class="col-md-5 column">
 
-                    <form method="POST">
-    
-                        <div class="field-box">
-                            <label>Id:</label>
-                            <div class="col-md-7">
-                                <input name="id" id="id" class="form-control" required autofocus type="text">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Nombre:</label>
-                            <div class="col-md-7">
-                                <input name="nombre" id="nombre" class="form-control" required type="text">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Contraseña:</label>
-                            <div class="col-md-7">
-                                <input name="contra" id="contra" class="form-control" required type="text">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Estado: (1 o 0)</label>
-                            <div class="col-md-7">
-                                <input name="estado" id="estado" class="form-control" required type="number" >
-                            </div>                            
-                        </div>
-                        
-                        <div class="field-box">
-                            <label>Nombre Completo:</label>
-                            <div class="col-md-7">
-                                <input name="NombreCompleto" id="NombreCompleto" class="form-control" required type="text">
-                            </div>                            
-                        </div>
-
-                        <div class="field-box">
-                            <label>DNI:</label>
-                            <div class="col-md-7">
-                                <input name="dni" id="dni" class="form-control" required type="text">
-                            </div>                            
-                        </div>                       
-
+                <form method="POST" action="editarCliente.php">
+                            <div class="field-box">
+                                <label>Id:</label>
+                                <div class="col-md-7">
+                                    <input name="ideditar" id="ideditar" class="form-control" required type="text">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>Nombre:</label>
+                                <div class="col-md-7">
+                                    <input name="nom_edit" id="nom_edit" class="form-control" required type="text">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>Contraseña:</label>
+                                <div class="col-md-7">
+                                    <input name="contra_edit" id="contra_edit" class="form-control" type="text">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>Estado:</label>
+                                <div class="col-md-7">
+                                    <input name="estado_edit" id="estado_edit" class="form-control" required type="number">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>Nombre Completo:</label>
+                                <div class="col-md-7">
+                                    <input name="nombre_completo_edit" id="nombre_completo_edit" class="form-control" required type="text">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>DNI:</label>
+                                <div class="col-md-7">
+                                    <input name="dni_edit" id="dni_edit" class="form-control" required type="text">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>Correo Electrónico:</label>
+                                <div class="col-md-7">
+                                    <input name="correo_electronico_edit" id="correo_electronico_edit" class="form-control" required type="email">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>Fecha Nacimiento:</label>
+                                <div class="col-md-7">
+                                    <input name="fecha_nacimiento_edit" id="fecha_nacimiento_edit" class="form-control" required type="date">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>País:</label>
+                                <div class="col-md-7">
+                                    <input name="pais_edit" id="pais_edit" class="form-control" required type="text">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>Género:</label>
+                                <div class="col-md-7">
+                                    <input name="genero_edit" id="genero_edit" class="form-control" required type="text">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>Teléfono:</label>
+                                <div class="col-md-7">
+                                    <input name="telefono_edit" id="telefono_edit" class="form-control" required type="text">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>Rol:</label>
+                                <div class="col-md-7">
+                                    <input name="rol_edit" id="rol_edit" class="form-control" required type="text">
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>Biografía:</label>
+                                <div class="col-md-7">
+                                    <textarea name="biografia_edit" id="biografia_edit" class="form-control"></textarea>
+                                </div>                            
+                            </div>
+                            <div class="field-box">
+                                <label>Avatar:</label>
+                                <div class="col-md-7">
+                                    <input name="avatar_edit" id="avatar_edit" class="form-control" type="file">
+                                </div>                            
+                            </div>
+                            
                         <div class="action">
                             <input type="submit"  class="btn-flat" id="registrar" value="Registrar" ></input>
                             <input type="button" onclick="listarClientes();"  class="btn-flat" id="mostrar" value="Mostrar" ></input>
+                            <input type="submit" class="btn-flat" value="Actualizar">
                         </div> 
                         
                     </form>
@@ -167,16 +213,16 @@
                 </div>
 
                 <!-- right column -->
-                <div id="miTabla" class="col-md-7 column pull-right">
-                    <div id="cargando">dfsgd</div>
-                </div>
+                
             </div>
         </div>
                 <div id="miTabla" class="col-md-7 column">
                     <div id="cargando"></div>
                 </div>
     </div>
-
+    <div id="miTabla" class="col-md-7 column ">
+                    <div id="cargando">dfsgd</div>
+                </div>
 
     <!-- scripts -->
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
