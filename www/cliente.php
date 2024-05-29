@@ -48,7 +48,7 @@
     }
 ?>
 
-<!DOCTYPE html>
+<! DOCTYPE html>
 <html lang="es">
 <head>
     <title>Administracion Clientes</title>
@@ -149,100 +149,97 @@
                 <!-- left column -->
                 <div id="miPagina" class="col-md-5 column">
 
-                    <form method="POST" action="registrarCliente.php">
+                <form method="POST" action="registrarCliente.php" enctype="multipart/form-data">
+    <!-- Campo oculto para indicar si se está editando -->
+    <input type="hidden" name="is_edit" id="is_edit" value="0">
+    <!-- Campo oculto para el ID del usuario en caso de edición -->
+    <input type="hidden" name="id" id="id" value="">
     
-                        <div class="field-box">
-                            <label>Id:</label>
-                            <div class="col-md-7">
-                                <input name="id" id="id" class="form-control" required autofocus type="text" value="<?php echo $id; ?>">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Nombre:</label>
-                            <div class="col-md-7">
-                                <input name="nombre" id="nombre" class="form-control" required type="text" value="<?php echo $nombre; ?>">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Contraseña:</label>
-                            <div class="col-md-7">
-                                <input name="contra" id="contra" class="form-control" type="text">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Estado: (1 o 0)</label>
-                            <div class="col-md-7">
-                                <input name="estado" id="estado" class="form-control" required type="number" value="<?php echo $estado; ?>">
-                            </div>                            
-                        </div>
-                        
-                        <div class="field-box">
-                            <label>Nombre Completo:</label>
-                            <div class="col-md-7">
-                                <input name="NombreCompleto" id="NombreCompleto" class="form-control" required type="text" value="<?php echo $NombreCompleto; ?>">
-                            </div>                            
-                        </div>
+    <div class="field-box">
+        <label>Nombre:</label>
+        <div class="col-md-7">
+            <input name="nombre" id="nombre" class="form-control" required type="text">
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>Contraseña:</label>
+        <div class="col-md-7">
+            <input name="contra" id="contra" class="form-control" required type="password">
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>Estado: (1 o 0)</label>
+        <div class="col-md-7">
+            <input name="estado" id="estado" class="form-control" required type="number" min="0" max="1">
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>Nombre Completo:</label>
+        <div class="col-md-7">
+            <input name="NombreCompleto" id="NombreCompleto" class="form-control" required type="text">
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>DNI:</label>
+        <div class="col-md-7">
+            <input name="dni" id="dni" class="form-control" required type="text">
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>Correo Electrónico:</label>
+        <div class="col-md-7">
+            <input name="correo_electronico" id="correo_electronico" class="form-control" required type="email">
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>Fecha Nacimiento:</label>
+        <div class="col-md-7">
+            <input name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" required type="date">
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>País:</label>
+        <div class="col-md-7">
+            <input name="pais" id="pais" class="form-control" required type="text">
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>Género:</label>
+        <div class="col-md-7">
+            <input name="genero" id="genero" class="form-control" required type="text">
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>Teléfono:</label>
+        <div class="col-md-7">
+            <input name="telefono" id="telefono" class="form-control" required type="text">
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>Rol:</label>
+        <div class="col-md-7">
+            <input name="rol" id="rol" class="form-control" required type="text">
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>Biografía:</label>
+        <div class="col-md-7">
+            <textarea name="biografia" id="biografia" class="form-control"></textarea>
+        </div>                            
+    </div>
+    <div class="field-box">
+        <label>Avatar:</label>
+        <div class="col-md-7">
+            <input name="avatar" id="avatar" class="form-control" type="file">
+        </div>                            
+    </div>
+    <div class="action">
+        <input type="submit" class="btn-flat" value="Registrar">
+        <input type="button" onclick="listarClientes();" class="btn-flat" value="Mostrar">
+    </div> 
+</form>
 
-                        <div class="field-box">
-                            <label>DNI:</label>
-                            <div class="col-md-7">
-                                <input name="dni" id="dni" class="form-control" required type="text" value="<?php echo $dni; ?>">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Correo Electrónico:</label>
-                            <div class="col-md-7">
-                                <input name="correo_electronico" id="correo_electronico" class="form-control" required type="email" value="<?php echo $correo_electronico; ?>">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Fecha Nacimiento:</label>
-                            <div class="col-md-7">
-                                <input name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" required type="date" value="<?php echo $fecha_nacimiento; ?>">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>País:</label>
-                            <div class="col-md-7">
-                                <input name="pais" id="pais" class="form-control" required type="text" value="<?php echo $pais; ?>">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Género:</label>
-                            <div class="col-md-7">
-                                <input name="genero" id="genero" class="form-control" required type="text" value="<?php echo $genero; ?>">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Teléfono:</label>
-                            <div class="col-md-7">
-                                <input name="telefono" id="telefono" class="form-control" required type="text" value="<?php echo $telefono; ?>">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Rol:</label>
-                            <div class="col-md-7">
-                                <input name="rol" id="rol" class="form-control" required type="text" value="<?php echo $rol; ?>">
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Biografía:</label>
-                            <div class="col-md-7">
-                                <textarea name="biografia" id="biografia" class="form-control"><?php echo $biografia; ?></textarea>
-                            </div>                            
-                        </div>
-                        <div class="field-box">
-                            <label>Avatar:</label>
-                            <div class="col-md-7">
-                                <input name="avatar" id="avatar" class="form-control" type="file">
-                            </div>                            
-                        </div>
-                        <div class="action">
-                            <input type="submit" class="btn-flat" value="Registrar">
-                            <input type="button" onclick="listarClientes();" class="btn-flat" value="Mostrar">
-                        </div> 
-                        
-                    </form>
+
 
                     <div id="mensaje" class="col-md-6">
                         
@@ -275,9 +272,46 @@
     <script src="js/jquery.dataTables.js"></script>
     <script src="js/personal.js"></script>
     <script type="text/javascript">
-        function listarClientes() {
-            window.location.href = 'listarCliente.php';
+   function listarClientes() {
+    $.ajax({
+        url: 'listarCliente.php',
+        type: 'GET',
+        success: function(data) {
+            $('#miTabla').html(data);
+            if ($.fn.DataTable.isDataTable('#example')) {
+                $('#example').DataTable().destroy();
+            }
+            $('#example').DataTable({
+                'pagingType': 'full_numbers',
+                'language': {
+                    'processing': 'Cargando...',
+                    'lengthMenu': 'Mostrar _MENU_ registros',
+                    'zeroRecords': 'No se encontraron resultados',
+                    'emptyTable': 'Ningún dato disponible en esta tabla',
+                    'info': 'Mostrando registros del _START_ al _END_ de un total de _TOTAL_ registros',
+                    'infoEmpty': 'Mostrando registros del 0 al 0 de un total de 0 registros',
+                    'infoFiltered': '(filtrado de un total de _MAX_ registros)',
+                    'search': 'Buscar:',
+                    'paginate': {
+                        'first': 'Primero',
+                        'last': 'Último',
+                        'next': 'Siguiente',
+                        'previous': 'Anterior'
+                    },
+                    'aria': {
+                        'sortAscending': ': Activar para ordenar la columna de manera ascendente',
+                        'sortDescending': ': Activar para ordenar la columna de manera descendente'
+                    }
+                },
+                'order': [[ 0, 'desc' ]],
+                'pageLength': 5,
+                'lengthMenu': [[5, 10, 20, -1], [5, 10, 20, 'All']]
+            });
         }
+    });
+}
+
+
     </script>
 </body>
 </html>
