@@ -15,7 +15,7 @@ include_once('conexion.php');
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 </head>
 <body>
-    <div id='pad-wrapper' class='datatables-page' style='margin-top:0px;'>
+    <div id='pad-wrapper' class='datatables-page' style='margin-top:0px; overflow: auto;'>
         <div class='row'>
             <div class='col-md-12'>
                 <table id='example' class='table table-hover'>

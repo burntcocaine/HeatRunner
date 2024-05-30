@@ -95,23 +95,29 @@
     <header class="navbar navbar-inverse" role="banner">
         <div class="navbar-header">            
             <a class="navbar-brand" href="principal.php">
-            <img src="/imagenes/logotr.png" class="logo" alt="logo" width="65" height="65" />Panel del administrador > Administración de usuarios
+            <img src="../imagenes/heatrunner.jpg" class="logo" alt="logo" width="65" height="65" />Panel del administrador > Administración de usuarios
             </a>
         </div>
-        <ul class="nav navbar-nav pull-right hidden-xs">                       
-            <li class="notification-dropdown hidden-xs hidden-sm">
+        <ul class="nav navbar-nav pull-right ">                       
+            <li class="notification-dropdown  ">
                 <a href="#" class="trigger">
-                    <i class="icon-user"></i>
+                <?php
+                    if (isset($_SESSION['avatar'])) {
+                        echo '<img src="data:image/jpeg;base64,' . $_SESSION['avatar'] . '" alt="User Avatar" width="30" height="30"/>';
+                    } else {
+                        echo '<i class="icon-user"></i>';
+                    }
+                    ?>
                 </a>
                 <div class="pop-dialog">                    
                 </div>
             </li>
             <li class="dropdown open">
-                <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle  " data-toggle="dropdown">
                     Bienvenido<?php echo ": ".$_SESSION['usuario'] ?>
                 </a>                
             </li>             
-            <li class="settings hidden-xs hidden-sm">
+            <li class="settings  ">
                 <a href="cerrarSesion.php" role="button">
                     <i class="icon-share-alt"></i>
                 </a>
@@ -152,119 +158,105 @@
             <!-- statistics chart built with jQuery Flot -->
             <div class="row form-wrapper">
                 <!-- left column -->
-                <div id="miPagina" class="col-md-5 column">
+                <div id="miPagina" class="col-md-12">
                     
                 
-<form method="POST" action="registrarCliente.php" enctype="multipart/form-data">
-    <!-- Campo oculto para indicar si se está editando -->
-    <input type="hidden" name="is_edit" id="is_edit" value="1">
-    <!-- Campo oculto para el ID del usuario en caso de edición -->
-    <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
+                <form method="POST" action="registrarCliente.php" enctype="multipart/form-data" class="container" style="padding:5px">
+                    <input type="hidden" name="is_edit" id="is_edit" value="1">
+                    <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
 
-    <div class="field-box">
-        <label>Nombre:</label>
-        <div class="col-md-7">
-            <input name="nombre" id="nombre" class="form-control" required type="text">
-        </div>                            
-    </div>
-    <div class="field-box">
-        <label>Contraseña:</label>
-        <div class="col-md-7">
-            <input name="contra" id="contra" class="form-control" type="password" placeholder="Dejar en blanco para mantener la contraseña actual">
-        </div>
-    </div>
-    <div class="field-box">
-        <label>Estado: (1 o 0)</label>
-        <div class="col-md-7">
-            <input name="estado" id="estado" class="form-control" required type="number" min="0" max="1">
-        </div>                            
-    </div>
-    <div class="field-box">
-        <label>Nombre Completo:</label>
-        <div class="col-md-7">
-            <input name="NombreCompleto" id="NombreCompleto" class="form-control" required type="text">
-        </div>                            
-    </div>
-    <div class="field-box">
-        <label>DNI:</label>
-        <div class="col-md-7">
-            <input name="dni" id="dni" class="form-control" required type="text">
-        </div>                            
-    </div>
-    <div class="field-box">
-        <label>Correo Electrónico:</label>
-        <div class="col-md-7">
-            <input name="correo_electronico" id="correo_electronico" class="form-control" required type="email">
-        </div>                            
-    </div>
-    <div class="field-box">
-        <label>Fecha Nacimiento:</label>
-        <div class="col-md-7">
-            <input name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" required type="date">
-        </div>                            
-    </div>
-    <div class="field-box">
-        <label>País:</label>
-        <div class="col-md-7">
-            <input name="pais" id="pais" class="form-control" required type="text">
-        </div>                            
-    </div>
-    <div class="field-box">
-        <label>Género:</label>
-        <div class="col-md-7">
-            <input name="genero" id="genero" class="form-control" required type="text">
-        </div>                            
-    </div>
-    <div class="field-box">
-        <label>Teléfono:</label>
-        <div class="col-md-7">
-            <input name="telefono" id="telefono" class="form-control" required type="text">
-        </div>                            
-    </div>
-    <div class="field-box">
-        <label>Rol:</label>
-        <div class="col-md-7">
-            <input name="rol" id="rol" class="form-control" required type="text">
-        </div>                            
-    </div>
-    <div class="field-box">
-        <label>Biografía:</label>
-        <div class="col-md-7">
-            <textarea name="biografia" id="biografia" class="form-control"></textarea>
-        </div>                            
-    </div>
-    <div class="field-box">
-        <label>Avatar:</label>
-        <div class="col-md-7">
-            <input name="avatar" id="avatar" class="form-control" type="file">
-        </div>                            
-    </div>
-    <div class="action">
-        <input type="submit" class="btn-flat" value="Registrar">
-        <input type="button" onclick="listarClientes();" class="btn-flat" value="Mostrar">
-    </div> 
-</form>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="nombre">Nombre:</label>
+                            <input name="nombre" id="nombre" class="form-control" required type="text">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="contra">Contraseña:</label>
+                            <input name="contra" id="contra" class="form-control" type="password" placeholder="Dejar en blanco para mantener la contraseña actual">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="estado">Estado: (1 o 0)</label>
+                            <input name="estado" id="estado" class="form-control" required type="number" min="0" max="1">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="NombreCompleto">Nombre Completo:</label>
+                            <input name="NombreCompleto" id="NombreCompleto" class="form-control" required type="text">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="dni">DNI:</label>
+                            <input name="dni" id="dni" class="form-control" required type="text">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="correo_electronico">Correo Electrónico:</label>
+                            <input name="correo_electronico" id="correo_electronico" class="form-control" required type="email">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="fecha_nacimiento">Fecha Nacimiento:</label>
+                            <input name="fecha_nacimiento" id="fecha_nacimiento" class="form-control" required type="date">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="pais">País:</label>
+                            <input name="pais" id="pais" class="form-control" required type="text">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="genero">Género:</label>
+                            <input name="genero" id="genero" class="form-control" required type="text">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="telefono">Teléfono:</label>
+                            <input name="telefono" id="telefono" class="form-control" required type="text">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="rol">Rol:</label>
+                            <input name="rol" id="rol" class="form-control" required type="text">
+                        </div>
+                        <div class="col-md-6">
+                            <label for="biografia">Biografía:</label>
+                            <textarea name="biografia" id="biografia" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-6">
+                            <label for="avatar">Avatar:</label>
+                            <input name="avatar" id="avatar" class="form-control" type="file">
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <input type="submit" class="btn btn-primary" value="Registrar">
+                            <input type="button" onclick="listarClientes();" class="btn btn-secondary" value="Mostrar">
+                        </div>
+                    </div>
+                </form>
 
 
 
-                    <div id="mensaje" class="col-md-6">
+
+                <div id="mensaje" class="col-md-6">
                         
                     </div>
 
-                </div>
+        </div>
 
                 <!-- right column -->
                 
             </div>
         </div>
-                <div id="miTabla" class="col-md-7 column">
+                <div id="miTabla" class="col-md-12">
                     <div id="cargando"></div>
                 </div>
     </div>
-    <div id="miTabla" class="col-md-7 column ">
-                    <div id="cargando">dfsgd</div>
-                </div>
-
+    
     <!-- scripts -->
     <script src="//code.jquery.com/jquery-1.10.2.js"></script>
     <script src="js/wysihtml5-0.3.0.js"></script>

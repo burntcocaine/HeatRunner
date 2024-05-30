@@ -50,26 +50,32 @@
 </head>
 <body>
     <!-- navbar -->
-    <header class="navbar navbar-inverse" role="banner">
+    <header class="navbar navbar-inverse" role="banner" >
         <div class="navbar-header">            
             <a class="navbar-brand" href="principal.php">
-            <img src="../imagenes/heat_logo.png" class="logo" alt="logo" width="65" height="65" />Panel del administrador
+            <img src="../imagenes/heatrunner.jpg" class="logo" alt="logo" width="65" height="65" />Panel del administrador
             </a>
         </div>
-        <ul class="nav navbar-nav pull-right hidden-xs">                       
-            <li class="notification-dropdown hidden-xs hidden-sm">
+        <ul class="nav navbar-nav pull-right">                       
+            <li class="notification-dropdown">
                 <a href="#" class="trigger">
-                    <i class="icon-user"></i>
+                <?php
+                    if (isset($_SESSION['avatar'])) {
+                        echo '<img src="data:image/jpeg;base64,' . $_SESSION['avatar'] . '" alt="User Avatar" width="30" height="30"/>';
+                    } else {
+                        echo '<img src="data:image/jpeg;base64,' . $_SESSION['avatar'] . '" alt="User Avatar" width="30" height="30"/>';
+                    }
+                    ?>
                 </a>
                 <div class="pop-dialog">                    
                 </div>
             </li>
             <li class="dropdown open">
-                <a href="#" class="dropdown-toggle hidden-xs hidden-sm" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     Bienvenido<?php echo ": ".$_SESSION['usuario'] ?>
                 </a>                
             </li>             
-            <li class="settings hidden-xs hidden-sm">
+            <li class="settings">
                 <a href="cerrarSesion.php" role="button">
                     <i class="icon-share-alt"></i>
                 </a>

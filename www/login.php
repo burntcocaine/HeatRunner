@@ -22,6 +22,7 @@ if ($fila) {
         $_SESSION['usuario'] = $usuario;
         $_SESSION['NombreCompleto'] = $fila['nombre_completo'];
         $_SESSION['dni'] = $fila['dni'];
+        $_SESSION['avatar'] = base64_encode($fila['avatar']);
 
         if ($usuario === 'admin') {
             header('Location: principal.php');
