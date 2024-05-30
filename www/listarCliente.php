@@ -23,7 +23,6 @@ include_once('conexion.php');
                         <tr>
                             <th>ID</th>
                             <th>Usuario</th>
-                            <th>Contraseña</th>
                             <th>Estado</th>
                             <th>Nombre Completo</th>
                             <th>DNI</th>
@@ -46,7 +45,6 @@ include_once('conexion.php');
                            echo "<tr>";
                            echo "<td>".$clientes['id']."</td>";
                            echo "<td>".$clientes['usuario']."</td>";
-                           echo "<td>".$clientes['contra']."</td>";
                            echo "<td>".$clientes['estado']."</td>";
                            echo "<td>".$clientes['nombre_completo']."</td>";
                            echo "<td>".$clientes['dni']."</td>";
@@ -123,7 +121,6 @@ include_once('conexion.php');
                 $('#id').val(cliente.id);
                 $('#is_edit').val(1); // Indicar que estamos en modo edición
                 $('#nombre').val(cliente.usuario);
-                $('#contra').val(cliente.contra);
                 $('#estado').val(cliente.estado);
                 $('#NombreCompleto').val(cliente.nombre_completo);
                 $('#dni').val(cliente.dni);
@@ -134,8 +131,15 @@ include_once('conexion.php');
                 $('#telefono').val(cliente.telefono);
                 $('#rol').val(cliente.rol);
                 $('#biografia').val(cliente.biografia);
-                // Manejo del avatar si es necesario
-                // $('#avatar').val(cliente.avatar);
+                // Dejar el campo de la contraseña vacío
+                $('#contra').val('');
+
+                // Manejo del avatar
+                if (cliente.avatar) {
+                    $('#avatar').attr('src', 'data:image/jpeg;base64,' + cliente.avatar);
+                } else {
+                    $('#avatar').attr('src', ''); // O una imagen por defecto
+                }
             } else {
                 alert(response.message);
             }

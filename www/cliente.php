@@ -27,12 +27,14 @@
     // Verificar si se está editando un usuario
     if (isset($_GET['edit'])) {
         $id = $_GET['edit'];
-        $sql = "SELECT * FROM usuario WHERE id = $id";
-        $res = mysqli_query($conexion, $sql);
+        $sql = "SELECT * FROM usuario WHERE id = ?";
+        $stmt = $conexion->prepare($sql);
+        $stmt->bind_param("i", $id);
+        $stmt->execute();
+        $res = $stmt->get_result();
         if ($res) {
-            $usuario = mysqli_fetch_assoc($res);
+            $usuario = $res->fetch_assoc();
             $nombre = $usuario['usuario'];
-            $contra = $usuario['contra'];
             $estado = $usuario['estado'];
             $NombreCompleto = $usuario['nombre_completo'];
             $dni = $usuario['dni'];
@@ -44,8 +46,11 @@
             $rol = $usuario['rol'];
             $biografia = $usuario['biografia'];
             $avatar = $usuario['avatar'];
+            // Asegúrate de que el campo de la contraseña esté vacío
+            $contra = '';
         }
     }
+    
 ?>
 
 <! DOCTYPE html>
@@ -148,13 +153,14 @@
             <div class="row form-wrapper">
                 <!-- left column -->
                 <div id="miPagina" class="col-md-5 column">
-
-                <form method="POST" action="registrarCliente.php" enctype="multipart/form-data">
+                    
+                
+<form method="POST" action="registrarCliente.php" enctype="multipart/form-data">
     <!-- Campo oculto para indicar si se está editando -->
-    <input type="hidden" name="is_edit" id="is_edit" value="0">
+    <input type="hidden" name="is_edit" id="is_edit" value="1">
     <!-- Campo oculto para el ID del usuario en caso de edición -->
-    <input type="hidden" name="id" id="id" value="">
-    
+    <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
+
     <div class="field-box">
         <label>Nombre:</label>
         <div class="col-md-7">
@@ -164,8 +170,8 @@
     <div class="field-box">
         <label>Contraseña:</label>
         <div class="col-md-7">
-            <input name="contra" id="contra" class="form-control" required type="password">
-        </div>                            
+            <input name="contra" id="contra" class="form-control" type="password" placeholder="Dejar en blanco para mantener la contraseña actual">
+        </div>
     </div>
     <div class="field-box">
         <label>Estado: (1 o 0)</label>
@@ -270,7 +276,7 @@
     <script src="js/jquery-ui-1.10.2.custom.min.js"></script>  
     <script src="js/theme.js"></script>
     <script src="js/jquery.dataTables.js"></script>
-    <script src="js/personal.js"></script>
+   <!-- <script src="js/personal.js"></script>  -->
     <script type="text/javascript">
    function listarClientes() {
     $.ajax({

@@ -18,12 +18,22 @@ $biografia = $_POST['biografia'];
 
 // Manejo del archivo de avatar
 $avatar = null;
+$max_avatar_size = 16777215; // 16 MB, que es el límite para MEDIUMBLOB
+
 if (isset($_FILES['avatar']) && $_FILES['avatar']['error'] == UPLOAD_ERR_OK) {
-    $avatar = file_get_contents($_FILES['avatar']['tmp_name']);
+    if ($_FILES['avatar']['size'] <= $max_avatar_size) {
+        $avatar = file_get_contents($_FILES['avatar']['tmp_name']);
+    } else {
+        die("El archivo de avatar es demasiado grande. El tamaño máximo permitido es 16 MB.");
+    }
 }
 
 // Cifrar la contraseña con bcrypt si se proporciona
-$contra_cifrada = !empty($contra) ? password_hash($contra, PASSWORD_BCRYPT) : null;
+if (!empty($contra)) {
+    $contra_cifrada = password_hash($contra, PASSWORD_BCRYPT);
+} else {
+    $contra_cifrada = null;
+}
 
 if ($is_edit == 1 && !empty($id)) {
     // Actualizar el usuario existente
@@ -39,36 +49,36 @@ if ($is_edit == 1 && !empty($id)) {
                 telefono = ?,
                 rol = ?,
                 biografia = ?";
-                
+
+    $params = [$nombre, $estado, $NombreCompleto, $dni, $correo_electronico, $fecha_nacimiento, $pais, $genero, $telefono, $rol, $biografia];
+
     if ($contra_cifrada) {
         $sql .= ", contra = ?";
+        $params[] = $contra_cifrada;
     }
-    
+
     if ($avatar) {
         $sql .= ", avatar = ?";
+        $params[] = $avatar;
     }
-    
+
     $sql .= " WHERE id = ?";
-    
+    $params[] = $id;
+
     $stmt = $conexion->prepare($sql);
-    
-    if ($contra_cifrada && $avatar) {
-        $stmt->bind_param("sissssssssssi", $nombre, $estado, $NombreCompleto, $dni, $correo_electronico, $fecha_nacimiento, $pais, $genero, $telefono, $rol, $biografia, $contra_cifrada, $avatar, $id);
-    } elseif ($contra_cifrada) {
-        $stmt->bind_param("sisssssssssi", $nombre, $estado, $NombreCompleto, $dni, $correo_electronico, $fecha_nacimiento, $pais, $genero, $telefono, $rol, $biografia, $contra_cifrada, $id);
-    } elseif ($avatar) {
-        $stmt->bind_param("sisssssssssbi", $nombre, $estado, $NombreCompleto, $dni, $correo_electronico, $fecha_nacimiento, $pais, $genero, $telefono, $rol, $biografia, $avatar, $id);
-    } else {
-        $stmt->bind_param("sisssssssssi", $nombre, $estado, $NombreCompleto, $dni, $correo_electronico, $fecha_nacimiento, $pais, $genero, $telefono, $rol, $biografia, $id);
-    }
+
+    // Generar la cadena de tipos para bind_param
+    $types = str_repeat("s", count($params) - 1) . "i";
+    $stmt->bind_param($types, ...$params);
 } else {
     // Insertar un nuevo usuario
     $sql = "INSERT INTO usuario (usuario, contra, estado, nombre_completo, dni, correo_electronico, fecha_nacimiento, pais, genero, telefono, rol, biografia, avatar)
             VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    
+
     $stmt = $conexion->prepare($sql);
     $stmt->bind_param("ssissssssssss", $nombre, $contra_cifrada, $estado, $NombreCompleto, $dni, $correo_electronico, $fecha_nacimiento, $pais, $genero, $telefono, $rol, $biografia, $avatar);
 }
+
 
 $res = $stmt->execute();
 

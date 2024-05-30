@@ -1,7 +1,7 @@
 <?php 
 include_once('conexion.php');
 
-$ideditar = $_POST['ideditar'];
+$idEditar = $_POST['idEditar'];
 $nom_edit = $_POST['nom_edit'];
 $contra_edit = $_POST['contra_edit']; // Campo para la nueva contraseña
 $estado_edit = $_POST['estado_edit'];
@@ -17,19 +17,19 @@ $biografia_edit = $_POST['biografia_edit'];
 $avatar_edit = $_POST['avatar_edit'];
 
 // Construir la consulta SQL
-$sql = "UPDATE usuario SET 
-        usuario = '$nom_edit', 
-        estado = $estado_edit, 
-        nombre_completo = '$nombre_completo_edit', 
-        dni = '$dni_edit', 
-        correo_electronico = '$correo_electronico_edit', 
-        fecha_nacimiento = '$fecha_nacimiento_edit', 
-        pais = '$pais_edit', 
-        genero = '$genero_edit', 
-        telefono = '$telefono_edit', 
-        rol = '$rol_edit', 
-        biografia = '$biografia_edit', 
-        avatar = '$avatar_edit'";
+$sql = "UPDATE usuario SET
+            usuario = '$nom_edit',
+            estado = '$estado_edit',
+            nombre_completo = '$nombre_completo_edit',
+            dni = '$dni_edit',
+            correo_electronico = '$correo_electronico_edit',
+            fecha_nacimiento = '$fecha_nacimiento_edit',
+            pais = '$pais_edit',
+            genero = '$genero_edit',
+            telefono = '$telefono_edit',
+            rol = '$rol_edit',
+            biografia = '$biografia_edit',
+            avatar = '$avatar_edit'";
 
 // Cifrar la contraseña si se proporciona una nueva
 if (!empty($contra_edit)) {
@@ -37,7 +37,7 @@ if (!empty($contra_edit)) {
     $sql .= ", contra = '$contra_cifrada'";
 }
 
-$sql .= " WHERE id = $ideditar;";
+$sql .= " WHERE id = '$idEditar'";
 
 $res = mysqli_query($conexion, $sql);
 
@@ -46,4 +46,5 @@ if ($res) {
 } else {
     echo "Incorrecto";
 }
+
 ?>

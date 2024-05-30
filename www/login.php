@@ -2,45 +2,40 @@
 session_start();
 include_once('conexion.php');
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $usuario = mysqli_real_escape_string($conexion, $_POST['usuario']);
-    $contra = $_POST['contra'];  // No necesitas escapar aquí porque password_verify no ejecuta SQL
+$usuario = mysqli_real_escape_string($conexion, $_POST['usuario']);
+$contra = mysqli_real_escape_string($conexion, $_POST['contra']);
 
-    // Añadir depuración para ver valores
-   
+$sql = "SELECT * FROM usuario WHERE usuario = ? AND estado = 1";
+$stmt = $conexion->prepare($sql);
+$stmt->bind_param("s", $usuario);
+$stmt->execute();
+$resultado = $stmt->get_result();
+$fila = $resultado->fetch_assoc();
 
-    $sql = "SELECT * FROM usuario WHERE usuario = ? AND estado = 1";
-    $stmt = $conexion->prepare($sql);
-    $stmt->bind_param("s", $usuario);
-    $stmt->execute();
-    $resultado = $stmt->get_result();
-    $fila = $resultado->fetch_assoc();
+if ($fila) {
+    // Debug: Mostrar el hash almacenado en la base de datos
+    //echo "Hash almacenado: " . $fila['contra'] . "<br>";
+    //echo "Contraseña ingresada: " . $contra . "<br>";
+    //echo "Cuenta ingresada: " . $usuario . "<br>";
 
-    if ($fila) {
-        // Añadir depuración para ver el hash de la contraseña
+    if (password_verify($contra, $fila['contra'])) {
+        $_SESSION['usuario'] = $usuario;
+        $_SESSION['NombreCompleto'] = $fila['nombre_completo'];
+        $_SESSION['dni'] = $fila['dni'];
 
-        if (password_verify($contra, $fila['contra'])) {
-            // Contraseña es correcta
-            $_SESSION['usuario'] = $usuario;
-            $_SESSION['NombreCompleto'] = $fila['nombre_completo'];
-            $_SESSION['dni'] = $fila['dni'];
-
-            if ($usuario === 'admin') {
-                header('Location: principal.php');
-            } else {
-                header('Location: vivienda.php');
-            }
-            exit;
+        if ($usuario === 'admin') {
+            header('Location: principal.php');
         } else {
-            // Contraseña incorrecta
-            echo "Contraseña incorrecta.";
+            header('Location: vivienda.php');
         }
+        exit;
     } else {
-        // Usuario no encontrado o inactivo
-        echo "Usuario no encontrado o inactivo.";
+        echo "Contraseña incorrecta.";
     }
-
-    $stmt->close();
-    $conexion->close();
+} else {
+    echo "Usuario no encontrado o inactivo.";
 }
+
+$stmt->close();
+$conexion->close();
 ?>
