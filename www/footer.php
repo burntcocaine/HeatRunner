@@ -9,10 +9,10 @@
             <div class="footer-section">
                 <h2>Navegación</h2>
                 <ul>
-                    <li><a href="index.php">Inicio</a></li>
-                    <li><a href="about.php">Sobre Nosotros</a></li>
-                    <li><a href="services.php">Servicios</a></li>
-                    <li><a href="contact.php">Contacto</a></li>
+                    <li><a href="../vivienda.php">Inicio</a></li>
+                    <li><a href="../about.php">Sobre Nosotros</a></li>
+                    <li><a href="../services.php">Servicios</a></li>
+                    <li><a href="../cerrarSesion.php">Cerrar sesión</a></li>
                 </ul>
             </div>
             <div class="footer-section">

@@ -1,8 +1,5 @@
 <?php  
-	/* Desarrollado por: PROGRAMANDO BROTHERS 	
-	Suscribete a : https://www.youtube.com/ProgramandoBrothers y comparte los v�deos.
-	Recuerda: "EL CONOCIMIENTO SE COMPARTE, POR M�S POCO QUE SEA".
-	*/
+	
     session_start();
     $usuario = $_SESSION['usuario'];
     if(!isset($usuario)){

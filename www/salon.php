@@ -1,8 +1,4 @@
 <?php  
-	/* Desarrollado por: PROGRAMANDO BROTHERS 	
-	Suscribete a : https://www.youtube.com/ProgramandoBrothers y comparte los v�deos.
-	Recuerda: "EL CONOCIMIENTO SE COMPARTE, POR M�S POCO QUE SEA".
-	*/
     session_start();
     $usuario = $_SESSION['usuario'];
     if(!isset($usuario)){
@@ -19,13 +15,14 @@
 
     <link rel="stylesheet" href="../css/estilo.css">
     <link rel="stylesheet" href="../css/estilo_habitacion.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <?php include 'header.php'; ?>
 
     <div class="contenido-principal">
         <div class="nombre-habitacion">
-            <h2 class="salon-centrado" id="toggle-view">Salón</h2>
+            <h2 class="salon-centrado" id="toggle-view">Cambiar vista</h2>
             <div class="plano-habitacion">
                 <?php
                 include_once('conexion.php');
@@ -57,7 +54,7 @@
                 $colorSalon = obtenerColorPorTemperatura($temperaturaMediaSalon);
                 ?>
                 <div class="habitacion" id="habitacion" style="background-color: <?php echo $colorSalon; ?>;">
-                    <div id="temp-view-1" class="temp-view">Cambiar vista</div>
+                    <div id="temp-view-1" class="temp-view">Salon</div>
                     <div id="temp-view-2" class="temp-view temp-view-hidden">
                         <div class="half" style="background-color: <?php echo obtenerColorPorTemperatura($sensores['salon1-room']); ?>;">Salón 1</div>
                         <div class="half" style="background-color: <?php echo obtenerColorPorTemperatura($sensores['salon2-room']); ?>;">Salón 2</div>
@@ -81,8 +78,10 @@
                         // Obtener lecturas para Salon1
                         $sqlSalon1 = "SELECT FechaLectura, ValorLectura FROM Lecturas WHERE IdSensor = 5 ORDER BY FechaLectura DESC";
                         $resultadoSalon1 = mysqli_query($conexion, $sqlSalon1);
+                        $datosSalon1 = [];
                         while ($fila = mysqli_fetch_assoc($resultadoSalon1)) {
                             echo "<tr><td>{$fila['FechaLectura']}</td><td>{$fila['ValorLectura']}°C</td></tr>";
+                            $datosSalon1[] = $fila;
                         }
                         ?>
                     </tbody>
@@ -99,15 +98,24 @@
                         // Obtener lecturas para Salon2
                         $sqlSalon2 = "SELECT FechaLectura, ValorLectura FROM Lecturas WHERE IdSensor = 6 ORDER BY FechaLectura DESC";
                         $resultadoSalon2 = mysqli_query($conexion, $sqlSalon2);
+                        $datosSalon2 = [];
                         while ($fila = mysqli_fetch_assoc($resultadoSalon2)) {
                             echo "<tr><td>{$fila['FechaLectura']}</td><td>{$fila['ValorLectura']}°C</td></tr>";
+                            $datosSalon2[] = $fila;
                         }
                         ?>
                     </tbody>
                 </table>
             </div>
         </div>
+        <div class="separator"></div>
+        <div class="grafica-contenedor">
+
+            <canvas id="graficaTemperaturas" class="grafica-temperaturas"></canvas>
+        </div>
     </div>
+
+    
 
     <?php include 'footer.php'; ?>
 
@@ -119,6 +127,53 @@
             salonView.style.alignItems = 'center';
             salonView.style.justifyContent = 'center';
             salonView.style.left= '50%';
+
+            // Preparar datos para la gráfica
+            const datosSalon1 = <?php echo json_encode($datosSalon1); ?>;
+            const datosSalon2 = <?php echo json_encode($datosSalon2); ?>;
+            const labels = datosSalon1.map(d => new Date(d.FechaLectura).getHours() + ':00').reverse();
+            const datos1 = datosSalon1.map(d => d.ValorLectura).reverse();
+            const datos2 = datosSalon2.map(d => d.ValorLectura).reverse();
+
+            // Crear gráfica
+            const ctx = document.getElementById('graficaTemperaturas').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Salón 1',
+                        data: datos1,
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        fill: false,
+                        tension: 0.1
+                    }, {
+                        label: 'Salón 2',
+                        data: datos2,
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+                        fill: false,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    scales: {
+                        x: {
+                            title: {
+                                display: true,
+                                text: 'Hora del día'
+                            }
+                        },
+                        y: {
+                            title: {
+                                display: true,
+                                text: 'Temperatura (°C)'
+                            }
+                        }
+                    }
+                }
+            });
         });
 
         document.getElementById('toggle-view').addEventListener('click', function() {

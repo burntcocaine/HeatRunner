@@ -66,7 +66,13 @@
             <div class="nav-right">
                 <div class="user-info">
                     <div class="avatar-container">
-                        <img src="../imagenes/heat_logo.jpg" class="avatar">
+                    <?php
+                    if (isset($_SESSION['avatar'])) {
+                        echo '<img src="data:image/jpeg;base64,' . $_SESSION['avatar'] . '" alt="User Avatar" width="30" height="30"/>';
+                    } else {
+                        echo '<img src="data:image/jpeg;base64,' . $_SESSION['avatar'] . '" alt="User Avatar" width="30" height="30"/>';
+                    }
+                    ?>
                     </div>
                     <span class="username">
                         <?php echo $_SESSION['usuario']; ?>
