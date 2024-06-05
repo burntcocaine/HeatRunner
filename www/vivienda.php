@@ -19,7 +19,7 @@
     <?php
     
     include_once('conexion.php');
-    include_once('obtener_colores.php'); // Asegúrate de que este script calcule y devuelva $colores como un array asociativo
+    include_once('obtener_colores.php'); //  este script calcula y devuelve $colores como array 
 
     $sql = "
         SELECT s.NombreSensor, l.ValorLectura, l.FechaLectura
@@ -58,7 +58,7 @@
     ?>
 
     <header>
-        <h1>Heat Runner</h1>
+    <a href="../vivienda.php"><h1>Heat Runner</h1></a>
         <nav>
             <div class="nav-left">
                 <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i></a>
@@ -102,15 +102,15 @@
             <div class="vivienda-container">
                 <div class="vivienda">
                     <!-- Coloca los enlaces a las diferentes páginas para cada habitación -->
-                    <a href="cocina.php" id="cocina-link"><div id="cocina-room" class="room cocina" style="background-color: <?php echo $colores['Cocina']; ?>;">Cocina</div></a>
-                    <a href="entrada.php" id="entrada-link"><div id="entrada-room" class="room entrada" style="background-color: <?php echo $colores['Entrada']; ?>;">Entrada</div></a>
+                    <a href="" id="cocina-link"><div id="cocina-room" class="room cocina" style="background-color: <?php echo $colores['Cocina']; ?>;">Cocina</div></a>
+                    <a href="" id="entrada-link"><div id="entrada-room" class="room entrada" style="background-color: <?php echo $colores['Entrada']; ?>;">Entrada</div></a>
                     <a href="salon.php" id="salon-link"><div id="salon-room" class="room salon" style="background-color: <?php echo $colores['Salon']; ?>;">Salón</div></a>
                     <a href="habitacion1.php" id="habitacion1-link"><div id="habitacion1-room" class="room habitacion1" style="background-color: <?php echo $colores['habitacion1-room']; ?>;">Habitación 1</div></a>
                     <a href="habitacion2.php" id="habitacion2-link"><div id="habitacion2-room" class="room habitacion2" style="background-color: <?php echo $colores['habitacion2-room']; ?>;">Habitación 2</div></a>
                     <a href="dormitorio.php" id="dormitorio-link"><div id="dormitorio-room" class="room dormitorio" style="background-color: <?php echo $colores['dormitorio-room']; ?>;">Dormitorio</div></a>
-                    <a href="balcon.php" id="balcon-link"><div id="balcon-room" class="room balcon" style="background-color: <?php echo $colores['Balcon']; ?>;">Balcón</div></a>
+                    <a href="" id="balcon-link"><div id="balcon-room" class="room balcon" style="background-color: <?php echo $colores['Balcon']; ?>;">Balcón</div></a>
                     <a href="bano.php" id="bano-link"><div id="bano-room" class="room bano" style="background-color: <?php echo $colores['bano-room']; ?>;">Baño</div></a>
-                    <a href="hall.php" id="hall-link"><div id="hall-room" class="room hall" style="background-color: <?php echo $colores['Hall']; ?>;">Hall</div></a>
+                    <a href="" id="hall-link"><div id="hall-room" class="room hall" style="background-color: <?php echo $colores['Hall']; ?>;">Hall</div></a>
                 </div>
             </div>
         </div>
@@ -152,30 +152,26 @@
         </div>
     
 
-    <footer class="footer">
+        <footer class="footer">
         <div class="footer-container">
             <div class="footer-section">
                 <h2>Contacto</h2>
-                <p>Dirección: Calle Falsa 123, Ciudad, País</p>
-                <p>Teléfono: +123 456 789</p>
-                <p>Email: contacto@heatrunner.com</p>
+                <p>Dirección: Ptda. Paraíso 44, 03570</p>
+                <p>Teléfono: 644 366 119</p>
+                <p>Email: admin@heat-runner.com</p>
             </div>
             <div class="footer-section">
                 <h2>Navegación</h2>
                 <ul>
-                    <li><a href="index.html">Inicio</a></li>
-                    <li><a href="about.html">Sobre Nosotros</a></li>
-                    <li><a href="services.html">Servicios</a></li>
-                    <li><a href="contact.html">Contacto</a></li>
+                    <li><a href="../vivienda.php">Inicio</a></li>
+                    <li><a href="../cerrarSesion.php">Cerrar Sesión</a></li>
+                    
                 </ul>
             </div>
             <div class="footer-section">
                 <h2>Síguenos</h2>
                 <ul class="social-links">
-                    <li><a href="https://facebook.com" target="_blank">Facebook</a></li>
-                    <li><a href="https://twitter.com" target="_blank">Twitter</a></li>
-                    <li><a href="https://instagram.com" target="_blank">Instagram</a></li>
-                    <li><a href="https://linkedin.com" target="_blank">LinkedIn</a></li>
+                    <li><a href="https://instagram.com/landyacht_owner" target="_blank">Instagram</a></li>
                 </ul>
             </div>
         </div>
@@ -188,6 +184,8 @@
         window.roomColors = <?php echo json_encode($colores); ?>;
     </script>
     <script type="text/javascript" src="vivienda.js"></script>
+        
 </body>
 </html>
+
 

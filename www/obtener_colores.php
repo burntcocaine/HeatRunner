@@ -27,16 +27,16 @@ while ($fila = mysqli_fetch_assoc($resultado)) {
 $temperaturaMediaSalon = obtenerTemperaturaMedia([$sensores['salon1-room'], $sensores['salon2-room']]);
 $colorSalon = obtenerColorPorTemperatura($temperaturaMediaSalon);
 
-
 // Suponemos que cada sensor tiene un nombre como 'Salon1', 'Salon2', etc., y que necesitas colores para varios sensores
 foreach ($sensores as $nombreSensor => $valor) {
     $colores[$nombreSensor] = obtenerColorPorTemperatura($valor);
-    }
-    $colores['salon-room'] = $colorSalon;
-    
+}
+$colores['salon-room'] = $colorSalon;
 
-
-echo json_encode($colores);  // Envía todos los colores calculados como un objeto JSON
+// Solo envía la respuesta JSON si se llama directamente
+if (isset($_GET['json'])) {
+    echo json_encode($colores);
+}
 
 function obtenerColorPorTemperatura($temperatura) {
     if ($temperatura >= 30) {
@@ -55,5 +55,4 @@ function obtenerColorPorTemperatura($temperatura) {
 function obtenerTemperaturaMedia($temperaturas) {
     return array_sum($temperaturas) / count($temperaturas);
 }
-
 ?>

@@ -1,30 +1,3 @@
-.menu-temperaturas {
-    background-color: #44BBA4;
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 20px;
-    list-style: none;
-    margin: 0;
-}
-
-.menu-temperaturas li {
-    display: flex;
-    align-items: center;
-    margin: 0;
-}
-
-.nombre-habitacion {
-    font-weight: bold;
-    margin-right: 10px;
-    flex: 1;
-    text-align: center;
-    flex-direction: column;
-}
-
-.temperatura {
-    font-style: italic;
-}
-
 .contenido-principal {
     display: flex;
     flex-direction: column;
@@ -35,6 +8,13 @@
 .separator {
     width: 80%;
     height: 2px;
+    background-color: #E7BB41;
+    margin: 20px 0;
+}
+
+.separator-Login{
+    height: 80%;
+    width: 2px;
     background-color: #E7BB41;
     margin: 20px 0;
 }
@@ -78,6 +58,16 @@
 }
 
 .habitacion {
+    height: 30vh;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #E7BB41;
+    background-color: white;
+    width: 100vh;
+}
+
+.hab{
+    display: flex;
     height: 40vh;
     align-items: center;
     justify-content: center;
@@ -158,3 +148,5 @@
         height: 50%;
     }
 }
+
+

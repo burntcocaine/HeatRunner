@@ -1,10 +1,10 @@
 <?php  
-    session_start();
-    $usuario = $_SESSION['usuario'];
-    if(!isset($usuario)){
-        header("Location: index.php");
-        exit;
-    }
+session_start();
+if(!isset($_SESSION['usuario'])){
+    header("Location: index.php");
+    exit;
+}
+$usuario = htmlspecialchars($_SESSION['usuario'], ENT_QUOTES, 'UTF-8');
 ?> 
 <!DOCTYPE html>
 <html lang="es">
@@ -12,14 +12,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HeatRunner - Salón</title>
-
     <link rel="stylesheet" href="../css/estilo.css">
     <link rel="stylesheet" href="../css/estilo_habitacion.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <?php include 'header.php'; ?>
-
     <div class="contenido-principal">
         <div class="nombre-habitacion">
             <h2 class="salon-centrado" id="toggle-view">Cambiar vista</h2>
@@ -28,7 +26,6 @@
                 include_once('conexion.php');
                 include_once('obtener_colores.php');
 
-                // Consulta para obtener la lectura más reciente de cada sensor
                 $sql = "
                     SELECT s.NombreSensor, l.ValorLectura, l.FechaLectura
                     FROM Sensores s
@@ -49,15 +46,14 @@
                     $sensores[$fila['NombreSensor']] = $fila['ValorLectura'];
                 }
 
-                // Calcular la temperatura media para el salón
                 $temperaturaMediaSalon = obtenerTemperaturaMedia([$sensores['salon1-room'], $sensores['salon2-room']]);
                 $colorSalon = obtenerColorPorTemperatura($temperaturaMediaSalon);
                 ?>
-                <div class="habitacion" id="habitacion" style="background-color: <?php echo $colorSalon; ?>;">
+                <div class="habitacion" id="habitacion" style="background-color: <?php echo htmlspecialchars($colorSalon, ENT_QUOTES, 'UTF-8'); ?>;">
                     <div id="temp-view-1" class="temp-view">Salon</div>
                     <div id="temp-view-2" class="temp-view temp-view-hidden">
-                        <div class="half" style="background-color: <?php echo obtenerColorPorTemperatura($sensores['salon1-room']); ?>;">Salón 1</div>
-                        <div class="half" style="background-color: <?php echo obtenerColorPorTemperatura($sensores['salon2-room']); ?>;">Salón 2</div>
+                        <div class="half" style="background-color: <?php echo htmlspecialchars(obtenerColorPorTemperatura($sensores['salon1-room']), ENT_QUOTES, 'UTF-8'); ?>;">Salón 1</div>
+                        <div class="half" style="background-color: <?php echo htmlspecialchars(obtenerColorPorTemperatura($sensores['salon2-room']), ENT_QUOTES, 'UTF-8'); ?>;">Salón 2</div>
                     </div>
                 </div>
             </div>
@@ -75,12 +71,11 @@
                     </thead>
                     <tbody>
                         <?php
-                        // Obtener lecturas para Salon1
                         $sqlSalon1 = "SELECT FechaLectura, ValorLectura FROM Lecturas WHERE IdSensor = 5 ORDER BY FechaLectura DESC";
                         $resultadoSalon1 = mysqli_query($conexion, $sqlSalon1);
                         $datosSalon1 = [];
                         while ($fila = mysqli_fetch_assoc($resultadoSalon1)) {
-                            echo "<tr><td>{$fila['FechaLectura']}</td><td>{$fila['ValorLectura']}°C</td></tr>";
+                            echo "<tr><td>" . htmlspecialchars($fila['FechaLectura'], ENT_QUOTES, 'UTF-8') . "</td><td>" . htmlspecialchars($fila['ValorLectura'], ENT_QUOTES, 'UTF-8') . "°C</td></tr>";
                             $datosSalon1[] = $fila;
                         }
                         ?>
@@ -95,12 +90,11 @@
                     </thead>
                     <tbody>
                         <?php
-                        // Obtener lecturas para Salon2
                         $sqlSalon2 = "SELECT FechaLectura, ValorLectura FROM Lecturas WHERE IdSensor = 6 ORDER BY FechaLectura DESC";
                         $resultadoSalon2 = mysqli_query($conexion, $sqlSalon2);
                         $datosSalon2 = [];
                         while ($fila = mysqli_fetch_assoc($resultadoSalon2)) {
-                            echo "<tr><td>{$fila['FechaLectura']}</td><td>{$fila['ValorLectura']}°C</td></tr>";
+                            echo "<tr><td>" . htmlspecialchars($fila['FechaLectura'], ENT_QUOTES, 'UTF-8') . "</td><td>" . htmlspecialchars($fila['ValorLectura'], ENT_QUOTES, 'UTF-8') . "°C</td></tr>";
                             $datosSalon2[] = $fila;
                         }
                         ?>
@@ -110,32 +104,25 @@
         </div>
         <div class="separator"></div>
         <div class="grafica-contenedor">
-
             <canvas id="graficaTemperaturas" class="grafica-temperaturas"></canvas>
         </div>
     </div>
-
-    
-
+    <?php include 'escala-temperatura.php'; ?>
     <?php include 'footer.php'; ?>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Centrar el h2 al cargar la página
             const salonView = document.getElementById('toggle-view');
             salonView.style.display = 'flex';
             salonView.style.alignItems = 'center';
             salonView.style.justifyContent = 'center';
             salonView.style.left= '50%';
 
-            // Preparar datos para la gráfica
             const datosSalon1 = <?php echo json_encode($datosSalon1); ?>;
             const datosSalon2 = <?php echo json_encode($datosSalon2); ?>;
             const labels = datosSalon1.map(d => new Date(d.FechaLectura).getHours() + ':00').reverse();
             const datos1 = datosSalon1.map(d => d.ValorLectura).reverse();
             const datos2 = datosSalon2.map(d => d.ValorLectura).reverse();
 
-            // Crear gráfica
             const ctx = document.getElementById('graficaTemperaturas').getContext('2d');
             new Chart(ctx, {
                 type: 'line',

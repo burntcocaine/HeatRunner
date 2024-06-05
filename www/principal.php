@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <title>Administracion</title>
+    <title>Administración usuarios</title>
     <meta http-equiv="Content-Type" content="text/html; charset=uft-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -50,7 +50,7 @@
     <header class="navbar navbar-inverse" role="banner" >
         <div class="navbar-header">            
             <a class="navbar-brand" href="principal.php">
-            <img src="../imagenes/heatrunner.jpg" class="logo" alt="logo" width="65" height="65" />Panel del administrador
+            <img src="../imagenes/heatrunner.jpg" class="logo" alt="logo" width="65" height="65" />Administración
             </a>
         </div>
         <ul class="nav navbar-nav pull-right">                       
@@ -91,7 +91,7 @@
                 </div>
                 <a href="principal.php">
                     <i class="icon-home"></i>
-                    <span>Home</span>
+                    <span>Inicio</span>
                 </a>
             </li>            
             

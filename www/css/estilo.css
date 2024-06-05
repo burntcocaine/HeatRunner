@@ -191,6 +191,10 @@ nav {
     display: flex;
     align-items: center;
     margin-right: 5px;
+    font-weight: bold;
+    margin-right: 10px;
+    text-align: center;
+    flex-direction: column;
 }
 
 .temperatura {

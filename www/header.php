@@ -6,9 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>HeatRunner</title>
     <link rel="stylesheet" href="../css/estilo.css">
+    <link rel="stylesheet" href="../css/estilo_habitacion.css">
+
 </head>
 <body>
     <?php
+    
     include_once('conexion.php');
     include_once('obtener_colores.php'); // Asegúrate de que este script calcule y devuelva $colores como un array asociativo
 
@@ -49,7 +52,7 @@
     ?>
 
     <header>
-        <h1>Heat Runner</h1>
+    <a href="../vivienda.php"><h1>Heat Runner</h1></a>
         <nav>
             <div class="nav-left">
                 <a href="#" class="back-btn"><i class="fas fa-arrow-left"></i></a>
@@ -57,12 +60,18 @@
             <div class="nav-right">
                 <div class="user-info">
                     <div class="avatar-container">
-                        <img src="../imagenes/heat_logo.jpg" class="avatar">
+                    <?php
+                    if (isset($_SESSION['avatar'])) {
+                        echo '<img src="data:image/jpeg;base64,' . $_SESSION['avatar'] . '" alt="User Avatar" width="30" height="30"/>';
+                    } else {
+                        echo '<img src="data:image/jpeg;base64,' . $_SESSION['avatar'] . '" alt="User Avatar" width="30" height="30"/>';
+                    }
+                    ?>
                     </div>
                     <span class="username">
-                        <?php echo isset($_SESSION['usuario']) ? $_SESSION['usuario'] : 'Invitado'; ?>
+                        <?php echo $_SESSION['usuario']; ?>
                     </span>
-                    <span class="separator">|</span>
+                    <span class="separator-Login">|</span>
                     <form action="cerrarSesion.php" method="post" style="display:inline;">
                         <button type="submit" class="logout-btn">Cerrar Sesión</button>
                     </form>
@@ -70,3 +79,15 @@
             </div>
         </nav>
     </header>
+
+    <main>
+        <div class="menu-temperaturas">
+            <?php include 'menu_temperaturas.php'; ?>
+            <?php
+            // Mostrar la temperatura de cada sensor disponible
+            foreach ($sensores as $nombreSensor => $temperatura) {
+                $nombreBonito = isset($nombresBonitos[$nombreSensor]) ? $nombresBonitos[$nombreSensor] : $nombreSensor;
+                echo '<li><span class="nombre-habitacion">' . $nombreBonito . ':</span> <span class="temperatura">' . $temperatura . '°C</span></li>';
+            }
+            ?>
+        </div>
