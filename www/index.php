@@ -24,7 +24,6 @@ if (isset($_SESSION['usuario'])) {
             <button type="submit" class="login_button">Iniciar sesión</button>
         </form>
 
-        <a href="register.php" class="login_register-link">Registrarse</a>
     </div>
 </body>
 </html>

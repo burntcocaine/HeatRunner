@@ -1,5 +1,6 @@
-ALTER DATABASE HeatRunner CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
+CREATE  DATABASE HeatRunner;
 
+ALTER DATABASE HeatRunner CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci;
 
 CREATE TABLE Viviendas (
   IdVivienda INT PRIMARY KEY,
@@ -7,7 +8,6 @@ CREATE TABLE Viviendas (
   Direccion VARCHAR(255),
   Tipo VARCHAR(255) 
 );
-
 
 -- Crear tabla Zonas
 CREATE TABLE Zonas (
@@ -35,10 +35,6 @@ CREATE TABLE Lecturas (
   FOREIGN KEY (IdSensor) REFERENCES Sensores(Sensor)
 );
 
-
-
-
-
 CREATE TABLE `usuario` (
   `id` int PRIMARY KEY,
   `usuario` varchar(50) NOT NULL,
@@ -56,11 +52,6 @@ CREATE TABLE `usuario` (
   `avatar` BLOB
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
-
-
-
-
-
 CREATE TABLE telegramas_knx (
     id INT AUTO_INCREMENT PRIMARY KEY,
     timestamp DATETIME, -- 'Tiempo'
@@ -74,16 +65,12 @@ CREATE TABLE telegramas_knx (
 );
 ALTER TABLE telegramas_knx CONVERT TO CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
-
 INSERT INTO telegramas_knx (timestamp, source_name, destination_name, information, data_type, dpt, value, additional_data)
 VALUES ('2024-01-05 19:38:26', 'Bajo', 'Z41 Pro', 'S=0 Bajo 1.1.3 Z41 Pro ZONA 1 ZONA 2 0/0/2 HORA 73 26 1C | Wednesday, 19:38:28 6 GroupValueWrite LL_ACK', 'GroupValueWrite', '1.1.3', '0/0/2', '{"hora": "73 26 1C", "dia": "Wednesday", "sub_mensaje": "19:38:28 6 GroupValueWrite LL_ACK"}');
-
-
 
 INSERT INTO Viviendas (IdVivienda, Nomvivienda, Direccion, Tipo) VALUES
 (1, 'Sainvi', 'Partida Paraiso 44', 'Apartamento'),
 (2, 'Paradise Property', 'Villajoyosa', 'Local');
-
 
 INSERT INTO Zonas (Idzona, Nomzona, IdVivienda) VALUES
 (1, 'Cocina', 1),

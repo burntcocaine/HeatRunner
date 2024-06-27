@@ -18,6 +18,7 @@ $usuario = htmlspecialchars($_SESSION['usuario'], ENT_QUOTES, 'UTF-8');
 </head>
 <body>
     <?php include 'header.php'; ?>
+    
     <div class="contenido-principal">
         <div class="nombre-habitacion">
             <h2>Habitación 1</h2>

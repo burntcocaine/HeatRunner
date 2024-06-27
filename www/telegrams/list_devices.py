@@ -11,7 +11,7 @@ async def main():
 
     connection_config = ConnectionConfig(
         connection_type=ConnectionType.TUNNELING,
-        gateway_ip='192.168.1.135',  # Cambia esto por la IP de tu pasarela KNX
+        gateway_ip='192.168.1.25',  # Cambia esto por la IP de tu pasarela KNX
         gateway_port=3671,
         local_ip='192.168.1.10'  # Asegúrate de que esta es la IP local de tu máquina
     )
